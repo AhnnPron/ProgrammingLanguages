@@ -1,0 +1,17 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-advanced-reader.ss" "lang")((modname |Sort in Scheme|) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #t #t none #f () #f)))
+(define findSmallest-helper
+  (lambda(lon currSmallest)
+    (if (null? lon)
+        currSmallest
+        (if (<(car lon) currSmallest)
+            (findSmallest-helper(cdr lon) (car lon))
+            (findSmallest-helper(cdr lon) currSmallest)))))
+
+(define findSmallest
+  (lambda(lon)
+    (if(null? lon)
+       #f
+       (findSmallest-helper(cdr lon)(car lon)))))
+

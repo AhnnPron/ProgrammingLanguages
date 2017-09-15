@@ -1,0 +1,31 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-advanced-reader.ss" "lang")((modname |Every in Scheme|) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #t #t none #f () #f)))
+(define every
+  (lambda (pred lst) ;function "every" takes in a predicate (?) and a list of elements
+    (if(null? lst) ;if we've gone to the end of the list, without hitting a snag, return true
+       #t
+       (if (pred (car lst)) ;if the first element in the list satisfies the predicate 
+           (every pred (cdr lst));move on to the next element
+            #f ;the element does not satisfy the predicate so we stop and return false
+            )
+    )
+  )
+)
+
+       
+;if the first element in the list satisfies the predicate,
+;continue on to the next element. If one element in the list does
+;not satisfy the predicate, stop and return false.
+;if the list is run through completely without countering the
+;predicate, return true.
+
+
+
+;(define every?
+ ; (lambda(pred lst)
+  ;  (if(null? lst)
+   ;    #t
+    ;   (if (pred(car lst))
+     ;      (every? pred(cdr lst))
+      ;     #f))))

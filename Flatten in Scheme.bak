@@ -1,0 +1,15 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-advanced-reader.ss" "lang")((modname |Flatten in Scheme|) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #t #t none #f () #f)))
+(define flatten
+  (lambda (slist)
+    (if (null? slist)
+        '()
+        (if (list?(car slist))
+            (if (empty?(car slist))
+               (flatten(cdr slist))
+               (append(car slist)(flatten(cdr slist))))))))
+;if the first element in the list is a list
+;check to see if it's empty
+;if it's empty, move on to the next element
+;if it is a list and is not empty, append to the new list

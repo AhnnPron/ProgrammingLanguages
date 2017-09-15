@@ -1,0 +1,15 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-advanced-reader.ss" "lang")((modname |Merge in Scheme|) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #t #t none #f () #f)))
+(define merge
+  (lambda(loi1 loi2)
+    (if (null? loi1)
+        '()
+        (append(sort-helper(car loi1) loi3)(merge(cdr loi1) loi2)))))
+
+(define sort-helper
+  (lambda(lst1 lst2)
+    (if (null? lst1)
+        '()
+        (
+        

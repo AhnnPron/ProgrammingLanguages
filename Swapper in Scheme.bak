@@ -1,0 +1,24 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-advanced-reader.ss" "lang")((modname |Swapper in Scheme|) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #t #t none #f () #f)))
+
+(define swapper
+  (lambda (s1 s2 slist)
+    (if (null? slist)
+        '()
+        (if (symbol?(car slist)) ;checking to see if the first element of the list is a character
+            (if (eqv?(car slist) s1) ;checking to see if the first element of the list is equal to s1
+                (cons s2(swapper s1 s2(cdr slist))) ;swap s2 and combine with original list
+                (if (eqv?(car slist) s2) ;checking to see if the first element of the list is equal to s2
+                    (cons s1(swapper s1 s2(cdr slist))) ; swap s1 and combine with original list
+                    (cons(car slist)(swapper s1 s2 (cdr slist))) ;if the first element of the list is a symbol, but there's no swap needed
+                 )
+             )
+            (cons(swapper s1 s2(car slist))(swapper s1 s2(cdr slist))) ;if the first element of the list is not a symbol, it's a list
+            )
+        )
+    )
+  )
+            
+               
+                    

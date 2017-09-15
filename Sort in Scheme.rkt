@@ -1,0 +1,31 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-advanced-reader.ss" "lang")((modname |Sort in Scheme|) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #t #t none #f () #f)))
+(define findSmallest-helper ;find the first smallest element, given the smallest element
+  (lambda(lon currSmallest) ;takes in a list of numbers and a number
+    (if (null? lon) ;if the list of numbers is empty, return the number
+        currSmallest
+        (if (<(car lon) currSmallest) ;if the first element in the list is smaller then the number
+            (findSmallest-helper(cdr lon) (car lon)) ;return the cdr of the list and the first element in the list
+            (findSmallest-helper(cdr lon) currSmallest))))) ;return the cdr of the list and the smallest element in the list
+
+(define findSmallest ;find the first smallest element
+  (lambda(lon)
+    (if(null? lon)
+       #f
+       (findSmallest-helper(cdr lon)(car lon)))))
+
+(define removeFirstVal ;find the second smallest element with list being 1 element smaller, removing the smallest element
+  (lambda(lon val) ;takes in a list and a number
+    (if(null? lon)
+       '()
+       (if(=(car lon) val) ;if the first element in the list is equal to the number
+          (cdr lon) ;return everything but the first element
+          (cons(car lon)(removeFirstVal(cdr lon) val)))))) ;otherwise concatinate the car with the cdr
+
+(define sortBlah ;Sort 
+  (lambda(lon)
+    (if (null? lon) ;if the list is not empty, sort the list until it's empty
+        '()
+        (cons(findSmallest lon)(sortBlah(removeFirstVal lon(findSmallest lon)))))))
+

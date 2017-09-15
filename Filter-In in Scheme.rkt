@@ -1,0 +1,24 @@
+;; The first three lines of this file were inserted by DrRacket. They record metadata
+;; about the language level of this file in a form that our tools can easily process.
+#reader(lib "htdp-advanced-reader.ss" "lang")((modname |Filter-In in Scheme|) (read-case-sensitive #t) (teachpacks ()) (htdp-settings #(#t constructor repeating-decimal #t #t none #f () #f)))
+(define filter-in
+  (lambda (pred lst);filter-in takes a predicate (null?, symbol?, list? etc) and a list
+    (if (null? lst) ;if the list is empty, end.
+        '()
+        (if (pred (car lst)) ;if the predicate is true for the first element in the list
+            (cons (car lst) (filter-in pred(cdr lst))) ;cons the car list to the remainder of the list
+            (filter-in pred(cdr lst)); return the remainder of the list because the predicate is not true for the first element
+            )
+        )
+    )
+  )
+
+;(define filter-in
+; (lambda(pred lst)
+;  (if (null? lst)
+;    '()
+;     (if (pred(car lst))
+;      (cons(car lst)(filter-in pred(cdr lst)))
+;      (filter-in pred(cdr lst))))))
+
+          
